@@ -1,6 +1,6 @@
 Progress
 
-23 / 23 Tasks Completed (100.0%)
+24 / 24 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -31,3 +31,7 @@ Sprint 3 — Landing Page UI
 - [x] Build AI Roadmap Interactive Preview and Pricing Matrix
 - [x] Build FAQ Accordion and Testimonials Carousel
 - [x] Build Trust & Statistics and Final CTA Banner
+
+Repository Reorganization
+
+- [x] Reorganize project structure (relocate all frontend files to frontend/ folder)
