@@ -1,6 +1,6 @@
 Progress
 
-21 / 23 Tasks Completed (91.3%)
+22 / 23 Tasks Completed (95.6%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -29,5 +29,5 @@ Sprint 3 — Landing Page UI
 - [x] Build Hero Section with Warm Dawn gradient and interactive mock illustrations
 - [x] Build Core Feature Grid and How It Works horizontal process flow
 - [x] Build AI Roadmap Interactive Preview and Pricing Matrix
-- [ ] Build FAQ Accordion and Testimonials Carousel
+- [x] Build FAQ Accordion and Testimonials Carousel
 - [ ] Build Trust & Statistics and Final CTA Banner

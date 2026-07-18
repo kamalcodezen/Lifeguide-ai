@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Navbar } from "@/shared/components/Navbar";
 import { Footer } from "@/shared/components/Footer";
 import Link from "next/link";
@@ -14,6 +17,8 @@ import {
   MessageSquare,
   Lock,
   CheckCircle2,
+  ChevronDown,
+  Star,
 } from "lucide-react";
 
 // Floating Card 1: Assessment Dialog
@@ -179,6 +184,12 @@ function HeroVisual() {
 }
 
 export default function Home() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (idx: number) => {
+    setOpenFaq(openFaq === idx ? null : idx);
+  };
+
   const differentiators = [
     {
       title: "Warmth vs. Anxiety",
@@ -255,6 +266,56 @@ export default function Home() {
       step: "05",
       title: "Simulate & Apply",
       desc: "Optimize your resume ATS score and run mock interview simulators.",
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "LifeGuide AI mapped out my exact gaps. I built a custom analytics dashboard project and landed my junior engineer job in 3 months.",
+      author: "Sarah L.",
+      title: "Recent Graduate",
+      track: "Frontend Track",
+    },
+    {
+      quote:
+        "Coming from sales operations, I had 8 hours a week. The adaptive roadmap scheduled everything perfectly. The mock interview scorer built my confidence.",
+      author: "David K.",
+      title: "Transitioned to Product Manager",
+      track: "PM Track",
+    },
+    {
+      quote:
+        "My resume was getting rejected immediately. The ATS matcher helped me optimize my formatting and keywords. I got three recruiter calls in 2 weeks.",
+      author: "Elena R.",
+      title: "Software Engineer",
+      track: "Backend Track",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "Which career tracks are supported?",
+      answer: "We currently support Frontend Engineering, Backend Engineering, and Product Management tracks.",
+    },
+    {
+      question: "How does the AI analyze my skill gaps?",
+      answer:
+        "Through a 5-10 diagnostic profiling assessment mapped during onboarding that evaluates core competencies dynamically.",
+    },
+    {
+      question: "Can I import job descriptions?",
+      answer:
+        "Yes, you can paste links or copy-paste texts from specific target job postings to compare them directly against your baseline profile.",
+    },
+    {
+      question: "How do custom portfolio briefs prevent generic templates?",
+      answer:
+        "The platform analyzes your unique skill gaps and details a custom business architecture requirement targeting those weaknesses instead of standard cookie-cutter templates.",
+    },
+    {
+      question: "Is there a student discount?",
+      answer: "Yes, verified student accounts receive special discounted pricing plans.",
     },
   ];
 
@@ -598,10 +659,64 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Section 08: Testimonials */}
+        <section
+          id="testimonials"
+          className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-12 border-t border-lifeguide-border bg-lifeguide-surface/30"
+        >
+          <div className="max-w-[1360px] mx-auto">
+            {/* Header Content */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-lifeguide-text-primary tracking-tight mb-4">
+                Success Stories from the Sanctuary
+              </h2>
+              <p className="font-sans text-base text-lifeguide-text-secondary">
+                See how candidates have navigated the transition from learning tracks directly into
+                professional roles.
+              </p>
+            </div>
+
+            {/* Testimonials Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {testimonials.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-lifeguide-surface border border-lifeguide-border rounded-xl p-8 shadow-sm flex flex-col justify-between hover:shadow-md hover:-translate-y-1 transition-all duration-200"
+                >
+                  <div className="flex flex-col">
+                    {/* Stars indicator */}
+                    <div className="flex items-center gap-1 mb-6 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-current stroke-0" />
+                      ))}
+                    </div>
+
+                    <p className="font-sans text-sm text-lifeguide-text-secondary italic leading-relaxed mb-6">
+                      &ldquo;{item.quote}&rdquo;
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between border-t border-lifeguide-border/60 pt-4 mt-2 select-none">
+                    <div>
+                      <h4 className="font-heading text-sm font-bold text-lifeguide-text-primary">
+                        {item.author}
+                      </h4>
+                      <p className="text-[10px] text-lifeguide-text-muted mt-0.5">{item.title}</p>
+                    </div>
+                    <span className="text-[9px] font-semibold text-lifeguide-primary bg-lifeguide-primary/10 px-2 py-0.5 rounded-full uppercase">
+                      {item.track}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Section 09: Pricing Matrix */}
         <section
           id="pricing"
-          className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-12 border-t border-lifeguide-border bg-lifeguide-surface/30"
+          className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-12 border-t border-lifeguide-border bg-lifeguide-canvas"
         >
           <div className="max-w-[1360px] mx-auto">
             {/* Header Content */}
@@ -663,7 +778,7 @@ export default function Home() {
                 {/* 1px gradient border backing */}
                 <div className="absolute inset-0 -m-[1px] bg-gradient-warm-dawn rounded-lg-card z-0 pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Popular floating badge badge */}
+                {/* Popular floating badge */}
                 <div className="absolute -top-3 left-6 text-[9px] font-bold text-white bg-gradient-warm-dawn px-3 py-0.5 rounded-full uppercase tracking-wider select-none z-20">
                   Most Popular
                 </div>
@@ -707,6 +822,57 @@ export default function Home() {
                   Upgrade to Copilot Pro
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 10: FAQ Accordion */}
+        <section
+          id="faq"
+          className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-12 border-t border-lifeguide-border bg-lifeguide-surface/30"
+        >
+          <div className="max-w-[800px] mx-auto">
+            {/* Header Content */}
+            <div className="text-center mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-lifeguide-text-primary tracking-tight mb-4">
+                Frequently Answered Questions
+              </h2>
+              <p className="font-sans text-base text-lifeguide-text-secondary">
+                Find clear answers to key operations and platform behaviors.
+              </p>
+            </div>
+
+            {/* FAQ List Accordion */}
+            <div className="border-t border-lifeguide-border">
+              {faqs.map((faq, index) => {
+                const isOpen = openFaq === index;
+                return (
+                  <div key={index} className="border-b border-lifeguide-border py-4">
+                    <button
+                      onClick={() => toggleFaq(index)}
+                      className="w-full flex items-center justify-between text-left font-heading text-sm sm:text-base font-bold text-lifeguide-text-primary py-2 select-none"
+                    >
+                      <span>{faq.question}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-lifeguide-text-muted transition-transform duration-200 shrink-0 ml-4 ${
+                          isOpen ? "rotate-180 text-lifeguide-primary" : ""
+                        }`}
+                      />
+                    </button>
+                    <div
+                      className={`grid transition-all duration-200 ease-in-out ${
+                        isOpen ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="font-sans text-xs sm:text-sm text-lifeguide-text-secondary leading-relaxed pb-2">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
