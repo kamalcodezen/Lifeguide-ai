@@ -1,6 +1,6 @@
 Progress
 
-11 / 11 Tasks Completed
+12 / 17 Tasks Completed
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -13,6 +13,16 @@ Progress
 - [x] Setup Environment Variables
 - [x] Configure Git
 - [x] First Commit
+
+Sprint 2 — Authentication Foundation
+
+- [x] Configure MongoDB Connection
+- [ ] Configure Better Auth Mongoose Schema & Adapter
+- [ ] Create Better Auth Edge APIs (`api/v1/auth/*`)
+- [ ] Build Sign-Up Page (`/signup`)
+- [ ] Build Sign-In Page (`/login`)
+- [ ] Implement Session Context Provider
+
 
 
 
