@@ -1,6 +1,6 @@
 Progress
 
-12 / 17 Tasks Completed
+17 / 17 Tasks Completed (100%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -17,14 +17,8 @@ Progress
 Sprint 2 — Authentication Foundation
 
 - [x] Configure MongoDB Connection
-- [ ] Configure Better Auth Mongoose Schema & Adapter
-- [ ] Create Better Auth Edge APIs (`api/v1/auth/*`)
-- [ ] Build Sign-Up Page (`/signup`)
-- [ ] Build Sign-In Page (`/login`)
-- [ ] Implement Session Context Provider
-
-
-
-
-
-
+- [x] Configure Better Auth Mongoose Schema & Adapter
+- [x] Create Better Auth Edge APIs (`api/v1/auth/*`)
+- [x] Build Sign-Up Page (`/signup`)
+- [x] Build Sign-In Page (`/login`)
+- [x] Implement Session Context Provider
