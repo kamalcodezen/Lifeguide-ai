@@ -1,4 +1,4 @@
-import { dbConnect } from "@/database/connection/dbConnect";
+import { dbConnect } from "../../database/connection/dbConnect";
 
 export async function getMongoClient() {
   const mongooseInstance = await dbConnect();

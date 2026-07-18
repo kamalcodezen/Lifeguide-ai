@@ -35,3 +35,4 @@ Sprint 3 — Landing Page UI
 Repository Reorganization
 
 - [x] Reorganize project structure (relocate all frontend files to frontend/ folder)
+- [x] Decouple frontend and backend into independent Next.js and Express applications

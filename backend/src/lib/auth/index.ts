@@ -1,8 +1,7 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
-import { nextCookies } from "better-auth/next-js";
 import mongoose from "mongoose";
-import { dbConnect } from "@/database/connection/dbConnect";
+import { dbConnect } from "../../database/connection/dbConnect";
 
 // Trigger Mongoose connection setup asynchronously (buffered internally by Mongoose)
 dbConnect().catch((err) => {
@@ -57,5 +56,4 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [nextCookies()],
 });
