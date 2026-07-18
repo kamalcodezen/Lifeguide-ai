@@ -12,6 +12,8 @@ import {
   Briefcase,
   FileText,
   MessageSquare,
+  Lock,
+  CheckCircle2,
 } from "lucide-react";
 
 // Floating Card 1: Assessment Dialog
@@ -256,6 +258,22 @@ export default function Home() {
     },
   ];
 
+  const freeFeatures = [
+    "1 active career track preference",
+    "Baseline diagnostic skill assessment",
+    "Initial study roadmap setup",
+    "Standard learning resources links",
+    "Email community support",
+  ];
+
+  const premiumFeatures = [
+    "Unlimited roadmaps and track profiling",
+    "Customized gap-filling project specs",
+    "Resume ATS matcher & keyword scorecards",
+    "Interactive mock interviews & evaluations",
+    "Priority 24/7 dedicated support",
+  ];
+
   return (
     <>
       <Navbar />
@@ -474,6 +492,220 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 07: AI Roadmap Interactive Preview */}
+        <section
+          id="roadmap-preview"
+          className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-12 border-t border-lifeguide-border bg-lifeguide-canvas"
+        >
+          <div className="max-w-[1360px] mx-auto text-center">
+            {/* Header Content */}
+            <div className="max-w-3xl mx-auto mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-lifeguide-text-primary tracking-tight mb-4">
+                Interactive Career Curriculum
+              </h2>
+              <p className="font-sans text-base text-lifeguide-text-secondary">
+                Preview the clean roadmap dashboard experience compiling skill diagnostics into
+                timed milestones.
+              </p>
+            </div>
+
+            {/* AI Roadmap Preview Card */}
+            <div className="relative max-w-[800px] mx-auto bg-lifeguide-surface p-8 shadow-xl rounded-lg-card shadow-inset-ambient group overflow-visible">
+              {/* Gradient border backing */}
+              <div className="absolute inset-0 -m-[1px] bg-gradient-warm-dawn rounded-lg-card z-0 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="relative z-10 text-left">
+                {/* Insights Badge & Title */}
+                <div className="mb-8">
+                  <span className="text-[10px] font-bold text-lifeguide-secondary uppercase tracking-widest block mb-1">
+                    AI Assessment Insights
+                  </span>
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-lifeguide-text-primary">
+                    Dynamic React & Redux Mastery Roadmap
+                  </h3>
+                </div>
+
+                {/* Horizontal Timeline Steps */}
+                <div className="relative mb-10 py-4">
+                  {/* Dotted horizontal line connectors */}
+                  <div className="absolute top-[38px] left-[15%] right-[15%] h-0.5 border-t-2 border-dashed border-lifeguide-border-strong -translate-y-1/2 z-0 hidden md:block" />
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 relative z-10">
+                    {/* Node 1: Completed */}
+                    <div className="flex items-center md:flex-col gap-4 md:gap-3">
+                      <div className="w-9 h-9 rounded-full bg-gradient-warm-dawn flex items-center justify-center text-white shrink-0 shadow-md">
+                        <CheckCircle2 className="w-5 h-5 stroke-[2.5]" />
+                      </div>
+                      <div className="flex flex-col md:items-center text-left md:text-center">
+                        <span className="text-[10px] font-bold text-lifeguide-secondary uppercase tracking-wider">
+                          Week 1 &bull; Done
+                        </span>
+                        <h4 className="text-sm font-bold text-lifeguide-text-primary mt-1">
+                          State Management Foundations
+                        </h4>
+                      </div>
+                    </div>
+
+                    {/* Node 2: In-Progress */}
+                    <div className="flex items-center md:flex-col gap-4 md:gap-3">
+                      <div className="w-9 h-9 rounded-full bg-lifeguide-surface border-2 border-lifeguide-primary flex items-center justify-center shrink-0 shadow-md relative">
+                        <div className="w-2.5 h-2.5 rounded-full bg-lifeguide-primary animate-pulse" />
+                      </div>
+                      <div className="flex flex-col md:items-center text-left md:text-center">
+                        <span className="text-[10px] font-bold text-lifeguide-primary uppercase tracking-wider">
+                          Week 2 &bull; Active
+                        </span>
+                        <h4 className="text-sm font-bold text-lifeguide-text-primary mt-1">
+                          Advanced Hooks & Custom Selectors
+                        </h4>
+                      </div>
+                    </div>
+
+                    {/* Node 3: Locked */}
+                    <div className="flex items-center md:flex-col gap-4 md:gap-3 opacity-30 select-none">
+                      <div className="w-9 h-9 rounded-full bg-lifeguide-border flex items-center justify-center text-lifeguide-text-muted shrink-0">
+                        <Lock className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col md:items-center text-left md:text-center">
+                        <span className="text-[10px] font-bold text-lifeguide-text-muted uppercase tracking-wider">
+                          Week 3 &bull; Locked
+                        </span>
+                        <h4 className="text-sm font-bold text-lifeguide-text-primary mt-1">
+                          Redux Middleware & Thunk Integrations
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Action footer */}
+                <div className="flex justify-center border-t border-lifeguide-border/60 pt-6 mt-2">
+                  <Link
+                    href="/signup"
+                    id="roadmap-preview-action"
+                    className="h-9 px-6 inline-flex items-center justify-center text-xs font-semibold text-lifeguide-text-primary border border-lifeguide-border-strong rounded-md-input hover:bg-lifeguide-surface-elevated transition-colors"
+                  >
+                    View Full Roadmap
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 09: Pricing Matrix */}
+        <section
+          id="pricing"
+          className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-12 border-t border-lifeguide-border bg-lifeguide-surface/30"
+        >
+          <div className="max-w-[1360px] mx-auto">
+            {/* Header Content */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-lifeguide-text-primary tracking-tight mb-4">
+                Simple, Transparent Options
+              </h2>
+              <p className="font-sans text-base text-lifeguide-text-secondary">
+                Select the path that fits your learning pace. Upgrade or cancel at any time.
+              </p>
+            </div>
+
+            {/* Pricing Matrix 2-Card Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto w-full">
+              {/* Explorer (Free) */}
+              <div className="bg-lifeguide-surface border border-lifeguide-border shadow-md rounded-lg-card p-8 flex flex-col justify-between hover:shadow-lg transition-all duration-200">
+                <div>
+                  <div className="mb-6">
+                    <h3 className="font-heading text-xl font-bold text-lifeguide-text-primary">
+                      Explorer
+                    </h3>
+                    <p className="font-sans text-xs text-lifeguide-text-secondary mt-1">
+                      Perfect for exploring career path options and baseline diagnostics.
+                    </p>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-6">
+                    <span className="font-heading text-3xl font-extrabold text-lifeguide-text-primary">
+                      $0
+                    </span>
+                    <span className="text-xs font-semibold text-lifeguide-text-muted ml-1.5">
+                      / lifetime
+                    </span>
+                  </div>
+
+                  {/* Feature checklist */}
+                  <ul className="space-y-3.5 mb-8 border-t border-lifeguide-border/60 pt-6">
+                    {freeFeatures.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-lifeguide-text-secondary">
+                        <Check className="w-4 h-4 text-lifeguide-success-text shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Link
+                  href="/signup"
+                  id="pricing-free-cta"
+                  className="h-11 w-full border border-lifeguide-border-strong text-lifeguide-text-primary rounded-md-input text-sm font-bold hover:bg-lifeguide-surface-elevated active:scale-[0.98] transition-all flex items-center justify-center"
+                >
+                  Choose Free Explorer
+                </Link>
+              </div>
+
+              {/* Copilot Pro ($19/mo) */}
+              <div className="relative bg-lifeguide-surface p-8 shadow-xl rounded-lg-card flex flex-col justify-between group overflow-visible hover:shadow-2xl transition-all duration-200">
+                {/* 1px gradient border backing */}
+                <div className="absolute inset-0 -m-[1px] bg-gradient-warm-dawn rounded-lg-card z-0 pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* Popular floating badge badge */}
+                <div className="absolute -top-3 left-6 text-[9px] font-bold text-white bg-gradient-warm-dawn px-3 py-0.5 rounded-full uppercase tracking-wider select-none z-20">
+                  Most Popular
+                </div>
+
+                <div className="relative z-10">
+                  <div className="mb-6">
+                    <h3 className="font-heading text-xl font-bold text-lifeguide-text-primary">
+                      Copilot Pro
+                    </h3>
+                    <p className="font-sans text-xs text-lifeguide-text-secondary mt-1">
+                      Comprehensive, gap-targeted acceleration suite to land roles.
+                    </p>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-6">
+                    <span className="font-heading text-3xl font-extrabold text-lifeguide-text-primary">
+                      $19
+                    </span>
+                    <span className="text-xs font-semibold text-lifeguide-text-muted ml-1.5">
+                      / month
+                    </span>
+                  </div>
+
+                  {/* Feature checklist */}
+                  <ul className="space-y-3.5 mb-8 border-t border-lifeguide-border/60 pt-6">
+                    {premiumFeatures.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-lifeguide-text-secondary">
+                        <Check className="w-4 h-4 text-lifeguide-success-text shrink-0 mt-0.5" />
+                        <span className="font-medium text-lifeguide-text-primary">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Link
+                  href="/signup"
+                  id="pricing-premium-cta"
+                  className="relative z-10 h-11 w-full text-white bg-gradient-warm-dawn rounded-md-input text-sm font-bold hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center shadow-md"
+                >
+                  Upgrade to Copilot Pro
+                </Link>
               </div>
             </div>
           </div>

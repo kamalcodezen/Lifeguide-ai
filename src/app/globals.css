@@ -199,6 +199,16 @@
                     linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
 }
 
+@utility shadow-inset-ambient {
+  box-shadow: inset 0 0 16px rgba(235, 126, 162, 0.04);
+}
+
+.dark {
+  .shadow-inset-ambient {
+    box-shadow: inset 0 0 16px rgba(247, 168, 194, 0.08);
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
