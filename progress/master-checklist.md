@@ -1,6 +1,6 @@
 Progress
 
-10 / 11 Tasks Completed
+11 / 11 Tasks Completed
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -12,7 +12,8 @@ Progress
 - [x] Configure Path Aliases
 - [x] Setup Environment Variables
 - [x] Configure Git
-- [ ] First Commit
+- [x] First Commit
+
 
 
 
