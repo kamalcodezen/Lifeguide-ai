@@ -1,0 +1,19 @@
+# build and bundle caches
+.next
+out
+build
+dist
+
+# dependencies
+node_modules
+package-lock.json
+
+# environments and local files
+.env
+.env.*
+*.log
+
+# editor configs
+.vscode
+.idea
+.agents
