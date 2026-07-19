@@ -14,6 +14,7 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
+import { OAuthButtons } from "./OAuthButtons";
 
 export function SignupForm() {
   const router = useRouter();
@@ -387,6 +388,9 @@ export function SignupForm() {
             )}
           </button>
         </div>
+        
+        {/* OAuth SSO */}
+        <OAuthButtons />
       </form>
 
       {/* Footer */}

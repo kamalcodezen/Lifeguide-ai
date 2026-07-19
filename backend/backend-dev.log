@@ -1,0 +1,21 @@
+
+> lifeguide-ai-backend@0.1.0 dev
+> tsx watch src/index.ts
+
+[MongoDB Mongoose] Successfully connected to database instance.
+[MongoDB] Successfully Connected to Atlas
+[LifeGuide Backend] Server listening on port 5000
+10:19:22 PM [tsx] change in ./src\features\profile\controllers\profileController.ts Restarting...
+[MongoDB Mongoose] Successfully connected to database instance.
+[MongoDB] Successfully Connected to Atlas
+[LifeGuide Backend] Server listening on port 5000
+10:19:50 PM [tsx] change in ./src\features\profile\controllers\profileController.ts Restarting...
+[MongoDB Mongoose] Successfully connected to database instance.
+[MongoDB] Successfully Connected to Atlas
+[LifeGuide Backend] Server listening on port 5000
+11:03:00 PM [tsx] change in ./src\lib\auth\index.ts Restarting...
+[MongoDB Mongoose] Successfully connected to database instance.
+[MongoDB] Successfully Connected to Atlas
+2026-07-19T17:33:07.738Z WARN [Better Auth]: Social provider google is missing clientId or clientSecret
+2026-07-19T17:33:07.739Z WARN [Better Auth]: Social provider github is missing clientId or clientSecret
+[LifeGuide Backend] Server listening on port 5000

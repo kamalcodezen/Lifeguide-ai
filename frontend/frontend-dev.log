@@ -1,0 +1,78 @@
+
+> lifeguide-ai@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.39.187.182:3000
+- Environments: .env
+✓ Ready in 1172ms
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Coding-Projects\projects\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Coding-Projects\projects\LifeGuide-AI\frontend\package-lock.json
+
+
+ GET / 200 in 520ms (next.js: 234ms, application-code: 287ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="geist_a715...">
+                          <body
++                           className="min-h-full flex flex-col"
+-                           className="min-h-full flex flex-col antigravity-scroll-lock"
+                          >
+                  ...
+ 
+ GET /dashboard 200 in 168ms (next.js: 76ms, application-code: 92ms)
+ GET /dashboard/profiler 200 in 162ms (next.js: 70ms, application-code: 92ms)
+ GET /dashboard/assessments 200 in 177ms (next.js: 78ms, application-code: 99ms)
+ GET /dashboard/roadmap 200 in 145ms (next.js: 63ms, application-code: 82ms)
+ GET /dashboard/ai 200 in 137ms (next.js: 70ms, application-code: 67ms)
+✓ Compiled in 150ms
+ GET /dashboard/ai 200 in 206ms (next.js: 81ms, application-code: 125ms)
+ GET /dashboard 200 in 71ms (next.js: 20ms, application-code: 51ms)
+ GET / 200 in 215ms (next.js: 15ms, application-code: 200ms)
+ GET /dashboard 200 in 60ms (next.js: 6ms, application-code: 54ms)
+ GET /dashboard/profiler 200 in 452ms (next.js: 144ms, application-code: 308ms)
+ GET /dashboard/assessments 200 in 165ms (next.js: 29ms, application-code: 136ms)
+ GET /dashboard/roadmap 200 in 146ms (next.js: 24ms, application-code: 122ms)
+ GET /dashboard/ai 200 in 117ms (next.js: 9ms, application-code: 108ms)
+ GET /dashboard/projects 200 in 206ms (next.js: 71ms, application-code: 134ms)
+ GET /dashboard/resume 404 in 75ms (next.js: 42ms, application-code: 33ms)
+ GET /dashboard/resume 404 in 75ms (next.js: 8ms, application-code: 67ms)
+ GET /dashboard/interview 404 in 30ms (next.js: 5ms, application-code: 25ms)
+ GET /dashboard/interview 404 in 58ms (next.js: 5ms, application-code: 53ms)
+ GET /dashboard/settings 404 in 38ms (next.js: 7ms, application-code: 31ms)
+ GET /dashboard/settings 404 in 65ms (next.js: 6ms, application-code: 58ms)
+ GET /dashboard/resume 404 in 54ms (next.js: 7ms, application-code: 47ms)
+ GET /dashboard/resume 404 in 78ms (next.js: 10ms, application-code: 68ms)

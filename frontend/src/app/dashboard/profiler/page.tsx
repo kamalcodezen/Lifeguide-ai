@@ -147,41 +147,6 @@ export default function ProfilerPage() {
     }
   };
 
-  const handleDeleteProfile = async () => {
-    if (!window.confirm("Are you sure you want to delete your profile? This action is permanent.")) {
-      return;
-    }
-
-    setSubmitting(true);
-    setError(null);
-    setSuccessMsg(null);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/v1/profile`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      const body = await res.json();
-
-      if (res.ok && body.success) {
-        setProfile(null);
-        setSuccessMsg("Your skill profile was deleted successfully.");
-        // Reset form variables
-        setTargetCareerTrack("");
-        setSkillLevel("novice");
-        setWeeklyAvailabilityHours(10);
-        setTempPreferences({});
-      } else {
-        setError(body?.error?.message || "Failed to delete profile.");
-      }
-    } catch {
-      setError("Unable to complete deletion request.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex h-[50vh] w-full flex-col items-center justify-center space-y-4">
@@ -403,16 +368,7 @@ export default function ProfilerPage() {
                 </svg>
                 <span>Edit Profile</span>
               </button>
-              <button
-                onClick={handleDeleteProfile}
-                disabled={submitting}
-                className="inline-flex items-center space-x-1.5 rounded-xl bg-red-50 border border-red-200 px-4 py-2.5 text-xs font-semibold text-red-700 transition hover:bg-red-100"
-              >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                <span>Delete</span>
-              </button>
+
             </div>
           </div>
 

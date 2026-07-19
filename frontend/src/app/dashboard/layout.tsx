@@ -68,6 +68,7 @@ const navLinks = [
   {
     name: "Resume Matcher",
     href: "/dashboard/resume",
+    comingSoon: true,
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -77,6 +78,7 @@ const navLinks = [
   {
     name: "Mock Interview",
     href: "/dashboard/interview",
+    comingSoon: true,
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -103,12 +105,35 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-  // Protected Route Check
+  const [profileLoading, setProfileLoading] = useState(true);
+
+  // Protected Route & Onboarding Check
   useEffect(() => {
     if (!loading && !isAuthenticated) {
       router.push("/login");
+      return;
     }
-  }, [loading, isAuthenticated, router]);
+    
+    // Check if user has a profile, if not force them to profiler
+    if (isAuthenticated) {
+      const checkProfile = async () => {
+        try {
+          const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+          const res = await fetch(`${API_BASE}/api/v1/profile`, { credentials: "include" });
+          
+          if (res.status === 404 && pathname !== "/dashboard/profiler" && pathname !== "/dashboard/settings") {
+            router.push("/dashboard/profiler?onboarding=true");
+          }
+        } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("Profile check failed", err);
+    } finally {
+          setProfileLoading(false);
+        }
+      };
+      checkProfile();
+    }
+  }, [loading, isAuthenticated, router, pathname]);
 
   // Memoized callbacks — defined before early return to comply with Rules of Hooks
   const handleSignOutClick = useCallback(async () => {
@@ -125,12 +150,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     return name ? name.charAt(0).toUpperCase() : "U";
   }, []);
 
-  if (loading || !isAuthenticated) {
+  if (loading || !isAuthenticated || profileLoading) {
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center space-y-4 bg-slate-50">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-slate-200 border-t-indigo-600"></div>
         <p className="text-sm font-medium text-slate-500 animate-pulse">
-          Authenticating session...
+          Loading dashboard...
         </p>
       </div>
     );
@@ -150,9 +175,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
 
         <nav className="flex-1 space-y-1 overflow-y-auto px-4 py-6">
-          {navLinks.map((link) => {
+          {navLinks.map((link: { href: string; comingSoon?: boolean; icon: React.ReactNode; name: string }) => {
             const isActive = pathname === link.href;
-            return (
+            const isComingSoon = link.comingSoon;
+            
+            return isComingSoon ? (
+              <div
+                key={link.href}
+                className="group flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-400 cursor-not-allowed opacity-70"
+              >
+                <div className="flex items-center space-x-3">
+                  <span>{link.icon}</span>
+                  <span>{link.name}</span>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">
+                  Soon
+                </span>
+              </div>
+            ) : (
               <Link
                 key={link.href}
                 href={link.href}
@@ -213,9 +253,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
 
             <nav className="flex-1 space-y-1 overflow-y-auto px-4 py-6">
-              {navLinks.map((link) => {
+              {navLinks.map((link: { href: string; comingSoon?: boolean; icon: React.ReactNode; name: string }) => {
                 const isActive = pathname === link.href;
-                return (
+                const isComingSoon = link.comingSoon;
+                
+                return isComingSoon ? (
+                  <div
+                    key={link.href}
+                    className="group flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-400 cursor-not-allowed opacity-70"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span>{link.icon}</span>
+                      <span>{link.name}</span>
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">
+                      Soon
+                    </span>
+                  </div>
+                ) : (
                   <Link
                     key={link.href}
                     href={link.href}

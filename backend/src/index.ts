@@ -20,6 +20,7 @@ const startServer = async () => {
     const profileRouter = (await import("./features/profile/routes/profileRoutes")).default;
     const roadmapRouter = (await import("./features/roadmap/routes/roadmapRoutes")).default;
     const projectsRouter = (await import("./features/projects/routes/projectRoutes")).default;
+    const exploreRouter = (await import("./features/projects/routes/exploreRoutes")).default;
     const assessmentRouter = (await import("./features/assessment/routes/assessmentRoutes")).default;
     const aiRouter = (await import("./features/ai/routes/aiRoutes")).default;
     const { notFound } = await import("./middlewares/notFound");
@@ -51,6 +52,7 @@ const startServer = async () => {
     app.use("/api/v1/profile", profileRouter);
     app.use("/api/v1/roadmaps", roadmapRouter);
     app.use("/api/v1/projects", projectsRouter);
+    app.use("/api/v1/explore", exploreRouter);
     app.use("/api/v1/assessments", assessmentRouter);
     app.use("/api/v1/ai", aiRouter);
 

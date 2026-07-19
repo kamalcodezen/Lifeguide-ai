@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { authClient } from "@/lib/auth/client";
 import { Mail, Lock, AlertCircle, CheckCircle2, Loader2, Eye, EyeOff } from "lucide-react";
+import { OAuthButtons } from "./OAuthButtons";
 
 export function LoginForm() {
   const router = useRouter();
@@ -202,7 +203,7 @@ export function LoginForm() {
         </div>
 
         {/* Submit Button */}
-        <div className="pt-2">
+        <div className="pt-2 space-y-3">
           <button
             type="submit"
             disabled={loading}
@@ -217,7 +218,23 @@ export function LoginForm() {
               "Sign In"
             )}
           </button>
+          
+          {/* Demo Login Button */}
+          <button
+            type="button"
+            disabled={loading}
+            onClick={() => {
+              setEmail("demo@lifeguide.ai");
+              setPassword("DemoPassword123!");
+            }}
+            className="bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 active:scale-98 transition-all duration-150 rounded-md-input h-11 w-full flex items-center justify-center font-heading text-sm font-semibold tracking-wide shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            Use Demo Account
+          </button>
         </div>
+
+        {/* OAuth SSO */}
+        <OAuthButtons />
       </form>
     </>
   );
