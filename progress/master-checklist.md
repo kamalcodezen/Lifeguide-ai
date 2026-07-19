@@ -1,6 +1,6 @@
 Progress
 
-24 / 24 Tasks Completed (100.0%)
+25 / 25 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -36,3 +36,8 @@ Repository Reorganization
 
 - [x] Reorganize project structure (relocate all frontend files to frontend/ folder)
 - [x] Decouple frontend and backend into independent Next.js and Express applications
+
+Sprint 4 — Backend Verification & Environment Setup
+
+- [x] Verify MongoDB connection, Better Auth initialization, and backend startup environment
+
