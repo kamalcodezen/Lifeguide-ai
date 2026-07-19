@@ -34,6 +34,8 @@ export async function dbConnect(): Promise<typeof mongoose> {
     };
 
     cached!.promise = mongoose.connect(MONGODB_URI!, opts).then((mongooseInstance) => {
+      // eslint-disable-next-line no-console
+      console.log("[MongoDB Mongoose] Successfully connected to database instance.");
       return mongooseInstance;
     });
   }

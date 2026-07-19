@@ -2,6 +2,20 @@ import type { Request, Response } from "express";
 import { auth } from "../../../lib/auth";
 import { signupSchema, signinSchema } from "../validation/authValidation";
 
+const setAuthCookies = (headers: Headers, res: Response) => {
+  if (typeof headers.getSetCookie === "function") {
+    const cookies = headers.getSetCookie();
+    if (cookies.length > 0) {
+      res.setHeader("set-cookie", cookies);
+    }
+  } else {
+    const setCookie = headers.get("set-cookie");
+    if (setCookie) {
+      res.setHeader("set-cookie", setCookie);
+    }
+  }
+};
+
 export const signUpController = async (req: Request, res: Response) => {
   try {
     const parsed = signupSchema.safeParse(req.body);
@@ -31,10 +45,7 @@ export const signUpController = async (req: Request, res: Response) => {
       returnHeaders: true,
     });
 
-    const setCookie = signUpResult.headers.get("set-cookie");
-    if (setCookie) {
-      res.setHeader("set-cookie", setCookie);
-    }
+    setAuthCookies(signUpResult.headers, res);
 
     return res.status(201).json({
       success: true,
@@ -89,10 +100,7 @@ export const signInController = async (req: Request, res: Response) => {
       returnHeaders: true,
     });
 
-    const setCookie = signInResult.headers.get("set-cookie");
-    if (setCookie) {
-      res.setHeader("set-cookie", setCookie);
-    }
+    setAuthCookies(signInResult.headers, res);
 
     return res.status(200).json({
       success: true,
@@ -151,10 +159,7 @@ export const signOutController = async (req: Request, res: Response) => {
       returnHeaders: true,
     });
 
-    const setCookie = signOutResult.headers.get("set-cookie");
-    if (setCookie) {
-      res.setHeader("set-cookie", setCookie);
-    }
+    setAuthCookies(signOutResult.headers, res);
 
     return res.status(200).json({
       success: true,
