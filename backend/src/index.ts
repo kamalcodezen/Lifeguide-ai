@@ -19,6 +19,8 @@ const startServer = async () => {
     const profileRouter = (await import("./features/profile/routes/profileRoutes")).default;
     const roadmapRouter = (await import("./features/roadmap/routes/roadmapRoutes")).default;
     const projectsRouter = (await import("./features/projects/routes/projectRoutes")).default;
+    const { notFound } = await import("./middlewares/notFound");
+    const { errorHandler } = await import("./middlewares/errorHandler");
 
     const app = express();
     const PORT = env.PORT;
@@ -40,6 +42,10 @@ const startServer = async () => {
     app.use("/api/v1/profile", profileRouter);
     app.use("/api/v1/roadmaps", roadmapRouter);
     app.use("/api/v1/projects", projectsRouter);
+
+    // Global error handler middlewares
+    app.use(notFound as any);
+    app.use(errorHandler as any);
 
     app.listen(PORT, () => {
       // eslint-disable-next-line no-console
