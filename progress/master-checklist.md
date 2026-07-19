@@ -1,6 +1,6 @@
 Progress
 
-26 / 26 Tasks Completed (100.0%)
+27 / 27 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -44,5 +44,7 @@ Sprint 4 — Backend Verification & Environment Setup
 Sprint 5 — Code Reorganization & Enterprise Refactoring
 
 - [x] Reorganize codebase into clean, enterprise-grade architecture
+- [x] Reorganize landing page modules into features/home feature directory
+
 
 
