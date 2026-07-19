@@ -19,3 +19,7 @@
 2026-07-19T17:33:07.738Z WARN [Better Auth]: Social provider google is missing clientId or clientSecret
 2026-07-19T17:33:07.739Z WARN [Better Auth]: Social provider github is missing clientId or clientSecret
 [LifeGuide Backend] Server listening on port 5000
+11:22:59 PM [tsx] change in ./src\index.ts Restarting...
+[MongoDB Mongoose] Successfully connected to database instance.
+[MongoDB] Successfully Connected to Atlas
+[LifeGuide Backend] Server listening on port 5000

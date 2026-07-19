@@ -20,6 +20,8 @@ export default function ExplorePage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("");
+  const [tech, setTech] = useState("");
+  const [sort, setSort] = useState("newest");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -34,6 +36,8 @@ export default function ExplorePage() {
         });
         if (search) queryParams.append("search", search);
         if (difficulty) queryParams.append("difficulty", difficulty);
+        if (tech) queryParams.append("tech", tech);
+        if (sort) queryParams.append("sort", sort);
 
         const res = await fetch(`${API_BASE}/api/v1/explore?${queryParams.toString()}`);
         const data = await res.json();
@@ -56,7 +60,7 @@ export default function ExplorePage() {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [page, search, difficulty]);
+  }, [page, search, difficulty, tech, sort]);
 
   return (
     <>
@@ -74,7 +78,7 @@ export default function ExplorePage() {
           </div>
 
           {/* Filters */}
-          <div className="flex flex-col md:flex-row items-center gap-4 mb-10 w-full max-w-4xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-4 mb-10 w-full max-w-6xl mx-auto">
             <div className="relative flex-1 w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-lifeguide-text-muted w-5 h-5" />
               <input 
@@ -85,16 +89,36 @@ export default function ExplorePage() {
                 className="w-full bg-white border border-lifeguide-border rounded-xl h-12 pl-12 pr-4 focus:ring-2 focus:ring-lifeguide-primary/20 focus:border-lifeguide-primary transition-all shadow-sm"
               />
             </div>
-            <select 
-              value={difficulty}
-              onChange={(e) => { setDifficulty(e.target.value); setPage(1); }}
-              className="w-full md:w-48 bg-white border border-lifeguide-border rounded-xl h-12 px-4 focus:ring-2 focus:ring-lifeguide-primary/20 focus:border-lifeguide-primary shadow-sm outline-none"
-            >
-              <option value="">All Difficulties</option>
-              <option value="entry">Entry Level</option>
-              <option value="mid">Mid Level</option>
-              <option value="senior">Senior Level</option>
-            </select>
+            
+            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+              <input 
+                type="text" 
+                placeholder="Filter by tech (e.g. React)" 
+                value={tech}
+                onChange={(e) => { setTech(e.target.value); setPage(1); }}
+                className="w-full sm:w-48 bg-white border border-lifeguide-border rounded-xl h-12 px-4 focus:ring-2 focus:ring-lifeguide-primary/20 focus:border-lifeguide-primary shadow-sm outline-none"
+              />
+              <select 
+                value={difficulty}
+                onChange={(e) => { setDifficulty(e.target.value); setPage(1); }}
+                className="w-full sm:w-40 bg-white border border-lifeguide-border rounded-xl h-12 px-4 focus:ring-2 focus:ring-lifeguide-primary/20 focus:border-lifeguide-primary shadow-sm outline-none"
+              >
+                <option value="">All Levels</option>
+                <option value="entry">Entry Level</option>
+                <option value="mid">Mid Level</option>
+                <option value="senior">Senior Level</option>
+              </select>
+              <select 
+                value={sort}
+                onChange={(e) => { setSort(e.target.value); setPage(1); }}
+                className="w-full sm:w-40 bg-white border border-lifeguide-border rounded-xl h-12 px-4 focus:ring-2 focus:ring-lifeguide-primary/20 focus:border-lifeguide-primary shadow-sm outline-none"
+              >
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="a-z">Name (A-Z)</option>
+                <option value="z-a">Name (Z-A)</option>
+              </select>
+            </div>
           </div>
 
           {/* Grid */}
@@ -161,7 +185,7 @@ export default function ExplorePage() {
             <div className="text-center py-20">
               <p className="text-slate-500 text-lg">No projects found matching your search.</p>
               <button 
-                onClick={() => { setSearch(""); setDifficulty(""); setPage(1); }}
+                onClick={() => { setSearch(""); setDifficulty(""); setTech(""); setSort("newest"); setPage(1); }}
                 className="mt-4 text-lifeguide-primary font-medium hover:underline"
               >
                 Clear filters

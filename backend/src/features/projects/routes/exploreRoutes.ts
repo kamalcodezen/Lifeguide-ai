@@ -13,6 +13,8 @@ router.get("/", async (req: Request, res: Response) => {
 
     const search = req.query.search as string;
     const difficulty = req.query.difficulty as string;
+    const tech = req.query.tech as string;
+    const sort = req.query.sort as string; // e.g. 'newest', 'oldest', 'a-z'
 
     const query: any = {};
     if (search) {
@@ -21,10 +23,19 @@ router.get("/", async (req: Request, res: Response) => {
     if (difficulty) {
       query.difficultyRating = difficulty;
     }
+    if (tech) {
+      // Assuming techStack is an array of strings in the DB
+      query.techStack = { $regex: tech, $options: "i" };
+    }
+
+    let sortObj: any = { createdAt: -1 };
+    if (sort === "oldest") sortObj = { createdAt: 1 };
+    if (sort === "a-z") sortObj = { title: 1 };
+    if (sort === "z-a") sortObj = { title: -1 };
 
     const totalCount = await Project.countDocuments(query);
     const projects = await Project.find(query)
-      .sort({ createdAt: -1 })
+      .sort(sortObj)
       .skip(skip)
       .limit(limit);
 
