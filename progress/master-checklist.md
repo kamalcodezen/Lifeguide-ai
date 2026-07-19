@@ -1,6 +1,6 @@
 Progress
 
-46 / 46 Tasks Completed (100.0%)
+47 / 47 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -81,6 +81,7 @@ Sprint 9 — Frontend Core Pages
 - [x] Task 17 — Authentication Integration
 - [x] Task 18 — Profile CRUD UI
 - [x] Task 19 — Assessment CRUD UI
+- [x] Task 20 — AI Roadmap UI
 
 
 
