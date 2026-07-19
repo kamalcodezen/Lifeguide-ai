@@ -1,5 +1,7 @@
 import "dotenv/config";
+import "./config/env"; // Trigger env validation immediately
 import { dbConnect } from "./database/connection/dbConnect";
+import { env } from "./config/env";
 
 const startServer = async () => {
   try {
@@ -16,7 +18,7 @@ const startServer = async () => {
     const authRouter = (await import("./features/auth/routes/authRoutes")).default;
 
     const app = express();
-    const PORT = process.env.PORT || 5000;
+    const PORT = env.PORT;
 
     app.use(
       cors({
