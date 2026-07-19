@@ -1,6 +1,6 @@
 Progress
 
-35 / 35 Tasks Completed (100.0%)
+36 / 36 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -22,10 +22,12 @@ Sprint 2 — Authentication Foundation
 - [x] Create Mongoose Assessment model matching database specification details
 - [x] Create Mongoose AssessmentResult model matching database specification details
 - [x] Create Mongoose Roadmap model matching database specification details
+- [x] Create Mongoose Project model matching database specification details
 - [x] Create Better Auth Edge APIs (`api/v1/auth/*`)
 - [x] Build Sign-Up Page (`/signup`)
 - [x] Build Sign-In Page (`/login`)
 - [x] Implement Session Context Provider
+
 
 
 
