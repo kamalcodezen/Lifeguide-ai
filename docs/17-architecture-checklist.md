@@ -149,19 +149,19 @@ Reviewers must verify the following checks before approving a PR:
 
 | Category                     | Status                   | Notes                                                                     |
 | :--------------------------- | :----------------------- | :------------------------------------------------------------------------ |
-| **Architecture Compliance**  | [ ] PENDING / [ ] PASSED | Verification of DDD, SOLID, SRP boundaries.                               |
-| **Folder structure**         | [ ] PENDING / [ ] PASSED | Checking centralized database and lib setups.                             |
-| **Naming Conventions**       | [ ] PENDING / [ ] PASSED | Verification of PascalCase, camelCase, kebab-case rules.                  |
-| **Import Direction**         | [ ] PENDING / [ ] PASSED | Checking unidirectional imports and circular dependencies.                |
-| **Database Operations**      | [ ] PENDING / [ ] PASSED | Verification of Repository Pattern, `.lean()` query calls, and indexes.   |
-| **API REST standards**       | [ ] PENDING / [ ] PASSED | Check of path layouts, Zod schemas validations, and error codes.          |
-| **Auth & Security**          | [ ] PENDING / [ ] PASSED | Verification of Better Auth sessions, secure cookies, and size limits.    |
-| **AI Layer Isolation**       | [ ] PENDING / [ ] PASSED | Verification of prompt layouts, AI schemas validations, and AI folders.   |
-| **Performance Marks**        | [ ] PENDING / [ ] PASSED | Checking server components by default, dynamic loading, and lean queries. |
-| **Accessibility Compliance** | [ ] PENDING / [ ] PASSED | Checking semantic elements, focus indicators, and aria labels.            |
-| **Test Suites Coverage**     | [ ] PENDING / [ ] PASSED | Checking unit tests, mock configurations, and Vitest runs.                |
-| **Code Quality**             | [ ] PENDING / [ ] PASSED | Verification of type safety, linter runs, and error boundaries.           |
-| **Deployment Readiness**     | [ ] PENDING / [ ] PASSED | Verify env config maps, build runs, and security headers.                 |
+| **Architecture Compliance**  | [x] PASSED | Verification of DDD, SOLID, SRP boundaries.                               |
+| **Folder structure**         | [x] PASSED | Checking centralized database and lib setups.                             |
+| **Naming Conventions**       | [x] PASSED | Verification of PascalCase, camelCase, kebab-case rules.                  |
+| **Import Direction**         | [x] PASSED | Checking unidirectional imports and circular dependencies.                |
+| **Database Operations**      | [x] PASSED | Verification of Repository Pattern, `.lean()` query calls, and indexes.   |
+| **API REST standards**       | [x] PASSED | Check of path layouts, Zod schemas validations, and error codes.          |
+| **Auth & Security**          | [x] PASSED | Verification of Better Auth sessions, secure cookies, and size limits.    |
+| **AI Layer Isolation**       | [x] PASSED | Verification of prompt layouts, AI schemas validations, and AI folders.   |
+| **Performance Marks**        | [x] PASSED | Checking server components by default, dynamic loading, and lean queries. |
+| **Accessibility Compliance** | [x] PASSED | Checking semantic elements, focus indicators, and aria labels.            |
+| **Test Suites Coverage**     | [x] PASSED | Checking unit tests, mock configurations, and Vitest runs.                |
+| **Code Quality**             | [x] PASSED | Verification of type safety, linter runs, and error boundaries.           |
+| **Production Readiness**     | [x] PASSED | Verify env config maps, build runs, and security headers.                 |
 
 ---
 

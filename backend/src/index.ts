@@ -20,6 +20,7 @@ const startServer = async () => {
     const roadmapRouter = (await import("./features/roadmap/routes/roadmapRoutes")).default;
     const projectsRouter = (await import("./features/projects/routes/projectRoutes")).default;
     const assessmentRouter = (await import("./features/assessment/routes/assessmentRoutes")).default;
+    const aiRouter = (await import("./features/ai/routes/aiRoutes")).default;
     const { notFound } = await import("./middlewares/notFound");
     const { errorHandler } = await import("./middlewares/errorHandler");
 
@@ -44,6 +45,7 @@ const startServer = async () => {
     app.use("/api/v1/roadmaps", roadmapRouter);
     app.use("/api/v1/projects", projectsRouter);
     app.use("/api/v1/assessments", assessmentRouter);
+    app.use("/api/v1/ai", aiRouter);
 
     // Global error handler middlewares
     app.use(notFound as any);

@@ -64,6 +64,15 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       ),
     },
     {
+      name: "AI Career Copilot",
+      href: "/dashboard/ai",
+      icon: (
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+    },
+    {
       name: "Learning Roadmap",
       href: "/dashboard/roadmap",
       icon: (

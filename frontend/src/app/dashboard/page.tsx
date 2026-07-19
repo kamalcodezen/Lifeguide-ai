@@ -54,6 +54,20 @@ export default function DashboardHome() {
 
   const featureCards = [
     {
+      title: "AI Career Copilot",
+      description: "Get real-time job path recommendations, gap details, and custom project briefs.",
+      status: stats.hasProfile ? "Active" : "Pending Profile",
+      statusClass: stats.hasProfile
+        ? "bg-indigo-50 text-indigo-700 border-indigo-200"
+        : "bg-slate-100 text-slate-600 border-slate-200",
+      href: "/dashboard/ai",
+      icon: (
+        <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+    },
+    {
       title: "Interactive Skill Profiler",
       description: "Diagnose your strengths and skill gaps using tailored track questionnaires.",
       status: stats.hasProfile ? "Completed" : "Not Started",
