@@ -24,7 +24,9 @@ export const getProfileController = async (req: AuthenticatedRequest, res: Respo
         targetCareerTrack: profile.targetCareerTrack,
         skillLevel: profile.skillLevel,
         weeklyAvailabilityHours: profile.weeklyAvailabilityHours,
-        preferences: Object.fromEntries(profile.preferences.entries()),
+        preferences: profile.preferences instanceof Map
+            ? Object.fromEntries(profile.preferences.entries())
+            : (profile.preferences as Record<string, string> | null) ?? {},
       },
     });
   } catch (error) {
@@ -65,7 +67,9 @@ export const createProfileController = async (req: AuthenticatedRequest, res: Re
         targetCareerTrack: profile.targetCareerTrack,
         skillLevel: profile.skillLevel,
         weeklyAvailabilityHours: profile.weeklyAvailabilityHours,
-        preferences: Object.fromEntries(profile.preferences.entries()),
+        preferences: profile.preferences instanceof Map
+            ? Object.fromEntries(profile.preferences.entries())
+            : (profile.preferences as unknown as Record<string, string>) ?? {},
       },
     });
   } catch (error: any) {
@@ -108,7 +112,9 @@ export const updateProfileController = async (req: AuthenticatedRequest, res: Re
         targetCareerTrack: profile.targetCareerTrack,
         skillLevel: profile.skillLevel,
         weeklyAvailabilityHours: profile.weeklyAvailabilityHours,
-        preferences: Object.fromEntries(profile.preferences.entries()),
+        preferences: profile.preferences instanceof Map
+            ? Object.fromEntries(profile.preferences.entries())
+            : (profile.preferences as unknown as Record<string, string>) ?? {},
       },
     });
   } catch (error: any) {

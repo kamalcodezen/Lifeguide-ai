@@ -24,6 +24,7 @@ interface Question {
 }
 
 export default function AssessmentsPage() {
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
   const [assessments, setAssessments] = useState<AssessmentData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -168,7 +169,7 @@ export default function AssessmentsPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:5000/api/v1/assessments", {
+      const res = await fetch(`${API_BASE}/api/v1/assessments`, {
         credentials: "include",
       });
       const body = await res.json();
@@ -189,6 +190,7 @@ export default function AssessmentsPage() {
       fetchAssessments();
     }, 0);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const validateForm = () => {
@@ -220,8 +222,8 @@ export default function AssessmentsPage() {
 
     try {
       const url = isEditing
-        ? `http://localhost:5000/api/v1/assessments/${editingId}`
-        : "http://localhost:5000/api/v1/assessments";
+        ? `${API_BASE}/api/v1/assessments/${editingId}`
+        : `${API_BASE}/api/v1/assessments`;
       const method = isEditing ? "PATCH" : "POST";
 
       const res = await fetch(url, {
@@ -261,7 +263,7 @@ export default function AssessmentsPage() {
     setSuccessMsg(null);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/assessments/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/assessments/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -288,7 +290,7 @@ export default function AssessmentsPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/assessments/start", {
+      const res = await fetch(`${API_BASE}/api/v1/assessments/start`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ assessmentId: assessment._id }),
@@ -333,7 +335,7 @@ export default function AssessmentsPage() {
     }));
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/assessments/submit", {
+      const res = await fetch(`${API_BASE}/api/v1/assessments/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

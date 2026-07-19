@@ -28,6 +28,7 @@ interface RoadmapData {
 }
 
 export default function RoadmapPage() {
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
   const [roadmap, setRoadmap] = useState<RoadmapData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,7 @@ export default function RoadmapPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:5000/api/v1/roadmaps", {
+      const res = await fetch(`${API_BASE}/api/v1/roadmaps`, {
         credentials: "include",
       });
 
@@ -63,6 +64,7 @@ export default function RoadmapPage() {
       fetchRoadmap();
     }, 0);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleGenerateRoadmap = async () => {
@@ -70,7 +72,7 @@ export default function RoadmapPage() {
     setError(null);
     setSuccessMsg(null);
     try {
-      const res = await fetch("http://localhost:5000/api/v1/roadmaps/generate", {
+      const res = await fetch(`${API_BASE}/api/v1/roadmaps/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -96,7 +98,7 @@ export default function RoadmapPage() {
     setSuccessMsg(null);
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/roadmaps/progress", {
+      const res = await fetch(`${API_BASE}/api/v1/roadmaps/progress`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

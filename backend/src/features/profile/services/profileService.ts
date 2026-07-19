@@ -1,7 +1,7 @@
 import { Profile } from "../../../database/models/Profile";
 
 export const getProfileByUserId = async (userId: string) => {
-  return await Profile.findOne({ userId, deletedAt: null });
+  return await Profile.findOne({ userId, deletedAt: null }).lean();
 };
 
 export const createProfile = async (userId: string, profileData: {

@@ -10,6 +10,7 @@ interface ProfileData {
 }
 
 export default function ProfilerPage() {
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -33,7 +34,7 @@ export default function ProfilerPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:5000/api/v1/profile", {
+      const res = await fetch(`${API_BASE}/api/v1/profile`, {
         credentials: "include",
       });
 
@@ -64,6 +65,7 @@ export default function ProfilerPage() {
       fetchProfile();
     }, 0);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const validateForm = () => {
@@ -112,7 +114,7 @@ export default function ProfilerPage() {
     };
 
     try {
-      const url = "http://localhost:5000/api/v1/profile";
+      const url = `${API_BASE}/api/v1/profile`;
       const method = isCreating ? "POST" : "PATCH";
 
       const res = await fetch(url, {
@@ -155,7 +157,7 @@ export default function ProfilerPage() {
     setSuccessMsg(null);
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/profile", {
+      const res = await fetch(`${API_BASE}/api/v1/profile`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -436,10 +438,16 @@ export default function ProfilerPage() {
             <div className="border-t border-slate-100 pt-6 space-y-3">
               <h3 className="text-sm font-bold text-slate-800">Job Preferences & Settings</h3>
               <div className="flex flex-wrap gap-2.5">
-                {Object.entries(profile.preferences).map(([k, v]) => (
+                {Object.entries(
+                  typeof profile.preferences === "object" && profile.preferences !== null
+                    ? profile.preferences instanceof Map
+                      ? Object.fromEntries(profile.preferences)
+                      : (profile.preferences as Record<string, string>)
+                    : {}
+                ).map(([k, v]) => (
                   <div key={k} className="rounded-lg bg-slate-50 border border-slate-200 px-3.5 py-2 text-xs">
                     <span className="font-semibold text-slate-600 mr-1.5">{k}:</span>
-                    <span className="text-slate-800">{v}</span>
+                    <span className="text-slate-800">{String(v)}</span>
                   </div>
                 ))}
               </div>

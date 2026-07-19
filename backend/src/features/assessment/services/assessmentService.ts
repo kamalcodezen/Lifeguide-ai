@@ -16,11 +16,11 @@ export const createAssessment = async (data: {
 };
 
 export const getAllAssessments = async () => {
-  return await Assessment.find({ deletedAt: null });
+  return await Assessment.find({ deletedAt: null }).lean();
 };
 
 export const getAssessmentById = async (id: string) => {
-  return await Assessment.findOne({ _id: id, deletedAt: null });
+  return await Assessment.findOne({ _id: id, deletedAt: null }).lean();
 };
 
 export const updateAssessment = async (

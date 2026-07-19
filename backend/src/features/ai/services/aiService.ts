@@ -5,17 +5,7 @@ import { getProjectPrompt } from "../../../ai/prompts/projectPrompt";
 import { projectSuggestionsResponseSchema } from "../../../ai/schemas/projectSchema";
 import { Profile } from "../../../database/models/Profile";
 import { AssessmentResult } from "../../../database/models/AssessmentResult";
-
-/**
- * Utility to strip markdown code fences from JSON response if present.
- */
-function cleanJsonString(str: string): string {
-  let cleaned = str.trim();
-  if (cleaned.startsWith("```")) {
-    cleaned = cleaned.replace(/^```[a-zA-Z]*/, "").replace(/```$/, "");
-  }
-  return cleaned.trim();
-}
+import { cleanJsonString } from "../../../utils/cleanJson";
 
 export const getCareerRecommendations = async (userId: string) => {
   const profile = await Profile.findOne({ userId, deletedAt: null }).lean();

@@ -5,20 +5,10 @@ import { AssessmentResult } from "../../../database/models/AssessmentResult";
 import { getGeminiClient } from "../../../lib/gemini/client";
 import { getRoadmapPrompt } from "../../../ai/prompts/roadmapPrompt";
 import { roadmapResponseSchema } from "../../../ai/schemas/roadmapSchema";
-
-/**
- * Utility to strip markdown code fences from JSON response if present.
- */
-function cleanJsonString(str: string): string {
-  let cleaned = str.trim();
-  if (cleaned.startsWith("```")) {
-    cleaned = cleaned.replace(/^```[a-zA-Z]*/, "").replace(/```$/, "");
-  }
-  return cleaned.trim();
-}
+import { cleanJsonString } from "../../../utils/cleanJson";
 
 export const getRoadmapByUserId = async (userId: string) => {
-  return await Roadmap.findOne({ userId, deletedAt: null });
+  return await Roadmap.findOne({ userId, deletedAt: null }).lean();
 };
 
 export const generateMockRoadmap = async (userId: string) => {

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession } from "@/shared/providers/SessionProvider";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 interface DashboardStats {
   hasProfile: boolean;
   hasRoadmap: boolean;
@@ -23,8 +25,8 @@ export default function DashboardHome() {
     const fetchDashboardState = async () => {
       try {
         const [profileRes, roadmapRes] = await Promise.all([
-          fetch("http://localhost:5000/api/v1/profile", { credentials: "include" }),
-          fetch("http://localhost:5000/api/v1/roadmaps", { credentials: "include" }),
+          fetch(`${API_BASE}/api/v1/profile`, { credentials: "include" }),
+          fetch(`${API_BASE}/api/v1/roadmaps`, { credentials: "include" }),
         ]);
 
         const hasProfile = profileRes.status === 200;

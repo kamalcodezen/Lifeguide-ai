@@ -13,6 +13,7 @@ const startServer = async () => {
     // 2. Dynamically import modules after active database connection is resolved
     const express = (await import("express")).default;
     const cors = (await import("cors")).default;
+    const helmet = (await import("helmet")).default;
     const { toNodeHandler } = await import("better-auth/node");
     const { auth } = await import("./lib/auth");
     const authRouter = (await import("./features/auth/routes/authRoutes")).default;
@@ -27,9 +28,15 @@ const startServer = async () => {
     const app = express();
     const PORT = env.PORT;
 
+    // Security headers
+    app.use(helmet({
+      crossOriginEmbedderPolicy: false,
+      contentSecurityPolicy: false, // CSP managed by Next.js headers
+    }));
+
     app.use(
       cors({
-        origin: "http://localhost:3000",
+        origin: process.env.FRONTEND_URL || "http://localhost:3000",
         credentials: true,
       })
     );

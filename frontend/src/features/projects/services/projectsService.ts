@@ -7,7 +7,7 @@ import type {
   GenerateProgressPayload,
 } from "../types";
 
-const BASE_URL = "http://localhost:5000/api/v1";
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/v1`;
 
 const defaultOptions: RequestInit = {
   credentials: "include",

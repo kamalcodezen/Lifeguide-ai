@@ -54,6 +54,8 @@ const AssessmentResultSchema = new Schema<IAssessmentResult>(
 
 // Compound index on userId and assessmentId
 AssessmentResultSchema.index({ userId: 1, assessmentId: 1 });
+// Compound index to optimize soft-delete filtered queries
+AssessmentResultSchema.index({ userId: 1, deletedAt: 1 });
 
 export const AssessmentResult =
   mongoose.models.AssessmentResult ||

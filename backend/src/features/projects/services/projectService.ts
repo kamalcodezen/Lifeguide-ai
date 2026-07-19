@@ -19,11 +19,11 @@ export const createProject = async (data: {
 };
 
 export const getAllProjects = async () => {
-  return await Project.find({ deletedAt: null });
+  return await Project.find({ deletedAt: null }).lean();
 };
 
 export const getProjectById = async (id: string) => {
-  return await Project.findOne({ _id: id, deletedAt: null });
+  return await Project.findOne({ _id: id, deletedAt: null }).lean();
 };
 
 export const updateProject = async (

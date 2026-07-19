@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useCallback } from "react";
 import { authClient } from "@/lib/auth/client";
 
 interface UserInfo {
@@ -23,9 +23,9 @@ const SessionContext = createContext<SessionContextType | undefined>(undefined);
 export function SessionProvider({ children }: { children: React.ReactNode }) {
   const { data, isPending } = authClient.useSession();
 
-  const handleSignOut = async () => {
+  const handleSignOut = useCallback(async () => {
     await authClient.signOut();
-  };
+  }, []);
 
   const value: SessionContextType = {
     user: data?.user

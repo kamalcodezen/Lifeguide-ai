@@ -60,6 +60,8 @@ const ProjectProgressSchema = new Schema<IProjectProgress>(
 
 // Unique compound index on userId and projectId
 ProjectProgressSchema.index({ userId: 1, projectId: 1 }, { unique: true });
+// Compound index to optimize soft-delete filtered queries
+ProjectProgressSchema.index({ userId: 1, deletedAt: 1 });
 
 export const ProjectProgress =
   mongoose.models.ProjectProgress ||

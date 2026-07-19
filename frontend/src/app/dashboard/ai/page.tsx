@@ -36,6 +36,7 @@ type TabType = "career" | "projects" | "gaps";
 
 export default function AiCopilotPage() {
   const [activeTab, setActiveTab] = useState<TabType>("career");
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
   
   // Data States
   const [careerData, setCareerData] = useState<CareerData | null>(null);
@@ -58,7 +59,7 @@ export default function AiCopilotPage() {
     try {
       // 1. Verify user profile exists first
       setLoadingStep("Checking user profile settings...");
-      const profileRes = await fetch("http://localhost:5000/api/v1/profile", {
+      const profileRes = await fetch(`${API_BASE}/api/v1/profile`, {
         credentials: "include",
       });
 
@@ -72,8 +73,8 @@ export default function AiCopilotPage() {
       // 2. Fetch AI Insights and project ideas in parallel
       setLoadingStep("Consulting Gemini AI Career Engine...");
       const [careerRes, projectsRes] = await Promise.all([
-        fetch("http://localhost:5000/api/v1/ai/career-recommendations", { credentials: "include" }),
-        fetch("http://localhost:5000/api/v1/ai/project-suggestions", { credentials: "include" }),
+        fetch(`${API_BASE}/api/v1/ai/career-recommendations`, { credentials: "include" }),
+        fetch(`${API_BASE}/api/v1/ai/project-suggestions`, { credentials: "include" }),
       ]);
 
       setLoadingStep("Validating AI response structured outputs...");
@@ -108,6 +109,7 @@ export default function AiCopilotPage() {
       hasFetched.current = true;
       fetchAiData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSaveProject = async (proj: ProjectSuggestion) => {
