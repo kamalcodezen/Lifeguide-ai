@@ -1,6 +1,6 @@
 Progress
 
-47 / 47 Tasks Completed (100.0%)
+49 / 49 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -83,3 +83,8 @@ Sprint 9 — Frontend Core Pages
 - [x] Task 19 — Assessment CRUD UI
 - [x] Task 20 — AI Roadmap UI
 - [x] Task 21 — Project Management UI
+
+Sprint 10 — AI Features & QA
+
+- [x] Task 22 — AI Features (Gemini Integration)
+- [x] Task 23 — End-to-End Testing & QA

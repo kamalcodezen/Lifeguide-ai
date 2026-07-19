@@ -101,7 +101,7 @@ export const submitAssessment = async (
     }
   });
 
-  const overallScore = Math.min(100, Math.round((correctCount / totalQuestions) * 100));
+  const overallScore = totalQuestions > 0 ? Math.min(100, Math.round((correctCount / totalQuestions) * 100)) : 0;
   const skippedCount = totalQuestions - answers.filter((a) => a.selectedOption !== "").length;
 
   const breakdown = new Map<string, number>();
