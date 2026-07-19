@@ -18,6 +18,7 @@ const startServer = async () => {
     const authRouter = (await import("./features/auth/routes/authRoutes")).default;
     const profileRouter = (await import("./features/profile/routes/profileRoutes")).default;
     const roadmapRouter = (await import("./features/roadmap/routes/roadmapRoutes")).default;
+    const projectsRouter = (await import("./features/projects/routes/projectRoutes")).default;
 
     const app = express();
     const PORT = env.PORT;
@@ -38,6 +39,7 @@ const startServer = async () => {
     app.use("/api/v1/auth", authRouter);
     app.use("/api/v1/profile", profileRouter);
     app.use("/api/v1/roadmaps", roadmapRouter);
+    app.use("/api/v1/projects", projectsRouter);
 
     app.listen(PORT, () => {
       // eslint-disable-next-line no-console
