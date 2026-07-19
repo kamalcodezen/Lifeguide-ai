@@ -1,6 +1,6 @@
 Progress
 
-41 / 41 Tasks Completed (100.0%)
+42 / 42 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -70,6 +70,11 @@ Sprint 7 — Core API Endpoints
 - [x] Task 12 — Profiler API
 - [x] Task 13 — Roadmap API
 - [x] Task 14 — Projects API
+
+Sprint 8 — Backend Robustness
+
+- [x] Task 15 — Global Error Handler
+
 
 
 
