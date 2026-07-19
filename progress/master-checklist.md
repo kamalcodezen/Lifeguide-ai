@@ -1,6 +1,6 @@
 Progress
 
-39 / 41 Tasks Completed (95.1%)
+40 / 41 Tasks Completed (97.5%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -68,7 +68,7 @@ Sprint 6 — AI Integrations
 Sprint 7 — Core API Endpoints
 
 - [x] Task 12 — Profiler API
-- [ ] Task 13 — Roadmap API
+- [x] Task 13 — Roadmap API
 - [ ] Task 14 — Projects API
 
 
