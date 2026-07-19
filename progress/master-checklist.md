@@ -82,11 +82,4 @@ Sprint 9 — Frontend Core Pages
 - [x] Task 18 — Profile CRUD UI
 - [x] Task 19 — Assessment CRUD UI
 - [x] Task 20 — AI Roadmap UI
-
-
-
-
-
-
-
-
+- [x] Task 21 — Project Management UI
