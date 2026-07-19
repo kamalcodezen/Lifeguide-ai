@@ -1,6 +1,6 @@
 Progress
 
-30 / 30 Tasks Completed (100.0%)
+31 / 31 Tasks Completed (100.0%)
 
 - [x] Create Next.js Project
 - [x] Configure TypeScript
@@ -51,6 +51,8 @@ Sprint 6 — AI Integrations
 
 - [x] Configure singleton Google Gen AI client wrapper using unified SDK
 - [x] Create structured prompts for Roadmaps, Careers, and Resumes under backend/src/ai/prompts/
+- [x] Create Zod schemas for Roadmaps, Careers, and Resumes under backend/src/ai/schemas/
+
 
 
 
