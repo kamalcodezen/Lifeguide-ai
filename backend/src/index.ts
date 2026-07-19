@@ -1,31 +1,47 @@
 import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import { toNodeHandler } from "better-auth/node";
-import { auth } from "./lib/auth";
-import authRouter from "./features/auth/routes/authRoutes";
+import { dbConnect } from "./database/connection/dbConnect";
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+const startServer = async () => {
+  try {
+    // 1. Establish database connection before importing or executing auth dependencies
+    await dbConnect();
+    // eslint-disable-next-line no-console
+    console.log("[MongoDB] Successfully Connected to Atlas");
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+    // 2. Dynamically import modules after active database connection is resolved
+    const express = (await import("express")).default;
+    const cors = (await import("cors")).default;
+    const { toNodeHandler } = await import("better-auth/node");
+    const { auth } = await import("./lib/auth");
+    const authRouter = (await import("./features/auth/routes/authRoutes")).default;
 
-app.use(express.json());
+    const app = express();
+    const PORT = process.env.PORT || 5000;
 
-// Handle Better Auth native routes
-app.all("/api/auth/*", toNodeHandler(auth));
+    app.use(
+      cors({
+        origin: "http://localhost:3000",
+        credentials: true,
+      })
+    );
 
-// Mount custom Version 1 API routes
-app.use("/api/v1/auth", authRouter);
+    app.use(express.json());
 
-// Start Express server
-app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`[LifeGuide Backend] Server listening on port ${PORT}`);
-});
+    // Handle Better Auth native routes
+    app.all("/api/auth/*", toNodeHandler(auth));
 
+    // Mount custom Version 1 API routes
+    app.use("/api/v1/auth", authRouter);
+
+    app.listen(PORT, () => {
+      // eslint-disable-next-line no-console
+      console.log(`[LifeGuide Backend] Server listening on port ${PORT}`);
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
