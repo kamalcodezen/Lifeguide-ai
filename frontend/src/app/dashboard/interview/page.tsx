@@ -57,6 +57,7 @@ export default function MockInterviewPage() {
         setChatHistory([{ role: "model", content: data.data.aiReply }]);
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Failed to start interview:", error);
     } finally {
       setLoading(false);
@@ -94,6 +95,7 @@ export default function MockInterviewPage() {
         }
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Failed to send message:", error);
     } finally {
       setLoading(false);

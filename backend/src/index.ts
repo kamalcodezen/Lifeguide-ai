@@ -23,6 +23,7 @@ const startServer = async () => {
     const exploreRouter = (await import("./features/projects/routes/exploreRoutes")).default;
     const assessmentRouter = (await import("./features/assessment/routes/assessmentRoutes")).default;
     const aiRouter = (await import("./features/ai/routes/aiRoutes")).default;
+    const itemsRouter = (await import("./features/items/routes/itemRoutes")).default;
     const { notFound } = await import("./middlewares/notFound");
     const { errorHandler } = await import("./middlewares/errorHandler");
 
@@ -55,6 +56,7 @@ const startServer = async () => {
     app.use("/api/v1/explore", exploreRouter);
     app.use("/api/v1/assessments", assessmentRouter);
     app.use("/api/v1/ai", aiRouter);
+    app.use("/api/v1/items", itemsRouter);
 
     // Global error handler middlewares
     app.use(notFound as any);
