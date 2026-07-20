@@ -50,6 +50,7 @@ export default function MockInterviewPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chatHistory: [], currentTurn: 1, maxTurns }),
+        credentials: "include",
       });
       const data = await res.json();
       
@@ -82,6 +83,7 @@ export default function MockInterviewPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chatHistory: newHistory, currentTurn: nextTurn, maxTurns }),
+        credentials: "include",
       });
       const data = await res.json();
       
