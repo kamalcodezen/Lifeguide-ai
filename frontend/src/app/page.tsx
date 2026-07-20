@@ -12,6 +12,7 @@ import { TestimonialsSection } from "@/features/home/sections/TestimonialsSectio
 import { PricingSection } from "@/features/home/sections/PricingSection";
 import { FaqSection } from "@/features/home/sections/FaqSection";
 import { CtaSection } from "@/features/home/sections/CtaSection";
+import { NewsletterSection } from "@/features/home/sections/NewsletterSection";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
         <TestimonialsSection />
         <PricingSection />
         <FaqSection />
+        <NewsletterSection />
         <CtaSection />
       </main>
       <Footer />
