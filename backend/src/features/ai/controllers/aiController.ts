@@ -94,3 +94,40 @@ export const conductMockInterviewController = async (req: AuthenticatedRequest, 
     });
   }
 };
+
+export const analyzeResumeController = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userId = req.user!.id;
+    const { resumeText, targetJobDescription } = req.body;
+    
+    if (!resumeText || !targetJobDescription) {
+      return res.status(400).json({
+        success: false,
+        error: { code: "INVALID_INPUT", message: "resumeText and targetJobDescription are required." }
+      });
+    }
+
+    const response = await aiService.analyzeResume(userId, resumeText, targetJobDescription);
+
+    return res.status(200).json({
+      success: true,
+      data: response,
+      meta: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+  } catch (error: any) {
+    const status = error.status || 500;
+    const code = status === 404 ? "NOT_FOUND" : "AI_SERVICE_ERROR";
+    return res.status(status).json({
+      success: false,
+      error: {
+        code,
+        message: error.message || "An unexpected error occurred during resume analysis.",
+      },
+      meta: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+  }
+};

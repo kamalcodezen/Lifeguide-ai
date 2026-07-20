@@ -253,3 +253,50 @@ export const conductMockInterview = async (userId: string, chatHistory: any[], c
 
   return validated.data;
 };
+
+export const analyzeResume = async (userId: string, resumeText: string, targetJobDescription: string) => {
+  const { getResumePrompt } = await import("../../../ai/prompts/resumePrompt");
+  const { resumeResponseSchema } = await import("../../../ai/schemas/resumeSchema");
+
+  if (!resumeText || !targetJobDescription) {
+    const err = new Error("Resume text and target job description are required.");
+    (err as any).status = 400;
+    throw err;
+  }
+
+  const prompt = getResumePrompt({ resumeText, targetJobDescription });
+
+  const ai = getGeminiClient();
+  const response = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+    },
+  });
+
+  if (!response || !response.text) {
+    const err = new Error("Failed to generate resume analysis from Gemini.");
+    (err as any).status = 502;
+    throw err;
+  }
+
+  const rawJson = cleanJsonString(response.text);
+  let parsedJson;
+  try {
+    parsedJson = JSON.parse(rawJson);
+  } catch (parseErr) {
+    const err = new Error("AI response structure is not valid JSON.");
+    (err as any).status = 502;
+    throw err;
+  }
+
+  const validated = resumeResponseSchema.safeParse(parsedJson);
+  if (!validated.success) {
+    const err = new Error("AI response failed validation against resume schema.");
+    (err as any).status = 502;
+    throw err;
+  }
+
+  return validated.data;
+};
