@@ -45,7 +45,7 @@ export const submitAssessmentSchema = z.object({
   answers: z
     .array(
       z.object({
-        questionId: z.string().min(1),
+        questionText: z.string().min(1),
         selectedOption: z.string().min(1),
       })
     )

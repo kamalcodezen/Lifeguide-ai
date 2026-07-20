@@ -66,19 +66,48 @@ export const startAssessment = async (userId: string, assessmentId: string) => {
     throw err;
   }
 
-  // Create or return a fresh assessment result tracking ID
-  return await AssessmentResult.create({
+  const result = await AssessmentResult.create({
     userId,
     assessmentId,
     overallScore: 0,
     skippedCount: 0,
     skillsBreakdown: new Map<string, number>(),
   });
+
+  const { getGeminiClient } = await import("../../../lib/gemini/client");
+  const { cleanJsonString } = await import("../../../utils/cleanJson");
+  const { getAssessmentGenerationPrompt } = await import("../../../ai/prompts/assessmentPrompt");
+  const { assessmentGenerationResponseSchema } = await import("../../../ai/schemas/assessmentSchema");
+
+  const prompt = getAssessmentGenerationPrompt({
+    trackCategory: assessment.trackCategory,
+    difficultyTier: assessment.difficultyTier,
+  });
+
+  const ai = getGeminiClient();
+  const aiResponse = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: prompt,
+    config: { responseMimeType: "application/json" },
+  });
+
+  if (!aiResponse || !aiResponse.text) {
+    throw new Error("Failed to generate assessment questions from Gemini.");
+  }
+
+  const rawJson = cleanJsonString(aiResponse.text);
+  const parsedJson = JSON.parse(rawJson);
+  const validated = assessmentGenerationResponseSchema.parse(parsedJson);
+
+  return {
+    resultId: result._id,
+    assessmentData: validated
+  };
 };
 
 export const submitAssessment = async (
   resultId: string,
-  answers: Array<{ questionId: string; selectedOption: string }>
+  answers: Array<{ questionText: string; selectedOption: string }>
 ) => {
   const result = await AssessmentResult.findOne({ _id: resultId, deletedAt: null });
   if (!result) {
@@ -87,38 +116,55 @@ export const submitAssessment = async (
     throw err;
   }
 
-  // Retrieve the assessment to determine the track details
   const assessment = await Assessment.findOne({ _id: result.assessmentId });
   const track = assessment ? assessment.trackCategory : "General";
+  const difficulty = assessment ? assessment.difficultyTier : "mid";
 
-  // Simulate evaluation of diagnostic score details
-  const totalQuestions = answers.length;
-  let correctCount = 0;
-  answers.forEach((ans) => {
-    // Arbitrary mock validation: options 'A' or 'C' are treated as correct
-    if (ans.selectedOption === "A" || ans.selectedOption === "C") {
-      correctCount += 1;
-    }
+  const { getGeminiClient } = await import("../../../lib/gemini/client");
+  const { cleanJsonString } = await import("../../../utils/cleanJson");
+  const { getAssessmentEvaluationPrompt } = await import("../../../ai/prompts/assessmentPrompt");
+  const { assessmentEvaluationResponseSchema } = await import("../../../ai/schemas/assessmentSchema");
+
+  const prompt = getAssessmentEvaluationPrompt({
+    trackCategory: track,
+    difficultyTier: difficulty,
+    qaPairs: answers,
   });
 
-  const overallScore = totalQuestions > 0 ? Math.min(100, Math.round((correctCount / totalQuestions) * 100)) : 0;
-  const skippedCount = totalQuestions - answers.filter((a) => a.selectedOption !== "").length;
+  const ai = getGeminiClient();
+  const aiResponse = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: prompt,
+    config: { responseMimeType: "application/json" },
+  });
 
-  const breakdown = new Map<string, number>();
-  breakdown.set(track, overallScore);
-  if (track === "Frontend Engineering") {
-    breakdown.set("React", Math.max(0, overallScore - 5));
-    breakdown.set("CSS/HTML", Math.max(0, overallScore + 5));
-  } else if (track === "Backend Engineering") {
-    breakdown.set("Node.js", Math.max(0, overallScore - 5));
-    breakdown.set("Databases", Math.max(0, overallScore + 5));
+  if (!aiResponse || !aiResponse.text) {
+    throw new Error("Failed to generate evaluation from Gemini.");
   }
 
-  result.overallScore = overallScore;
-  result.skippedCount = skippedCount;
-  result.skillsBreakdown = breakdown;
+  const rawJson = cleanJsonString(aiResponse.text);
+  const parsedJson = JSON.parse(rawJson);
+  const validated = assessmentEvaluationResponseSchema.parse(parsedJson);
 
-  return await result.save();
+  // Convert object to Map for Mongoose
+  const breakdownMap = new Map<string, number>();
+  Object.entries(validated.skillsBreakdown).forEach(([key, val]) => {
+    breakdownMap.set(key, val as number);
+  });
+
+  result.overallScore = validated.overallScore;
+  result.skippedCount = answers.filter((a) => !a.selectedOption).length;
+  result.skillsBreakdown = breakdownMap;
+  
+  // optionally save strengths, weaknesses, recommendations to result if added to schema
+  // (Assuming schema doesn't have them yet, we'll just return them so the controller can send them)
+
+  await result.save();
+  
+  return {
+    result,
+    evaluation: validated
+  };
 };
 
 export const getAssessmentResultById = async (id: string) => {

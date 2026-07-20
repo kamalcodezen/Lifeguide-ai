@@ -169,9 +169,7 @@ export const startAssessmentController = async (req: AuthenticatedRequest, res: 
 
     return res.status(200).json({
       success: true,
-      data: {
-        resultId: result._id,
-      },
+      data: result,
     });
   } catch (error: any) {
     const status = error.status || 500;
