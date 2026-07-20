@@ -104,8 +104,16 @@ export default function ExploreDetailsPage({ params }: { params: Promise<{ id: s
                   {project.title}
                 </h1>
                 
-                <h3 className="text-lg font-bold text-slate-800 mt-10 mb-4">Project Overview & Requirements</h3>
-                <ul className="space-y-4">
+                <h3 className="text-xl font-bold text-slate-800 mt-10 mb-4">Description</h3>
+                <p className="text-slate-600 leading-relaxed mb-8">
+                  This project challenges you to build a comprehensive {project.title.toLowerCase()}. 
+                  It is designed for {project.difficultyRating} developers looking to enhance their portfolio 
+                  and prove their competency with modern development frameworks. By completing this project, 
+                  you will demonstrate your ability to solve real-world problems and deliver production-ready code.
+                </p>
+
+                <h3 className="text-xl font-bold text-slate-800 mb-4">Overview & Objectives</h3>
+                <ul className="space-y-4 mb-8">
                   {project.requirements.map((req, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <CheckCircle2 className="w-6 h-6 text-indigo-500 flex-shrink-0 mt-0.5" />
@@ -113,6 +121,30 @@ export default function ExploreDetailsPage({ params }: { params: Promise<{ id: s
                     </li>
                   ))}
                 </ul>
+
+                <h3 className="text-xl font-bold text-slate-800 mb-4">Specifications</h3>
+                <div className="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <span className="text-sm text-slate-400 block mb-1">Target Audience</span>
+                      <span className="font-medium text-slate-700 capitalize">{project.difficultyRating} Developers</span>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-400 block mb-1">Estimated Time</span>
+                      <span className="font-medium text-slate-700">
+                        {project.difficultyRating === 'entry' ? '1-2 Weeks' : project.difficultyRating === 'mid' ? '2-4 Weeks' : '1+ Months'}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-400 block mb-1">Primary Stack</span>
+                      <span className="font-medium text-slate-700">{project.techStack[0] || 'Agnostic'}</span>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-400 block mb-1">Project Type</span>
+                      <span className="font-medium text-slate-700">Full-Stack Application</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Mock Reviews / Testimonials */}
