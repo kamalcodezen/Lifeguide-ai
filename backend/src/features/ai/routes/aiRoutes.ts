@@ -3,6 +3,7 @@ import { requireAuth } from "../../profile/middleware/authMiddleware";
 import {
   getCareerRecommendationsController,
   getProjectSuggestionsController,
+  conductMockInterviewController,
 } from "../controllers/aiController";
 
 const router = Router();
@@ -12,5 +13,6 @@ router.use(requireAuth as any);
 
 router.get("/career-recommendations", getCareerRecommendationsController);
 router.get("/project-suggestions", getProjectSuggestionsController);
+router.post("/interview", conductMockInterviewController);
 
 export default router;
