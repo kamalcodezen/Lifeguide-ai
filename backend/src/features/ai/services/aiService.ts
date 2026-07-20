@@ -300,3 +300,56 @@ export const analyzeResume = async (userId: string, resumeText: string, targetJo
 
   return validated.data;
 };
+
+export const generateRoadmap = async (userId: string, identifiedGaps: string[] = []) => {
+  const profile = await Profile.findOne({ userId, deletedAt: null }).lean();
+  if (!profile) {
+    const err = new Error("Skill profile not found. Please complete the Skill Profiler onboarding first.");
+    (err as any).status = 404;
+    throw err;
+  }
+
+  const { getRoadmapPrompt } = await import("../../../ai/prompts/roadmapPrompt");
+  const { roadmapResponseSchema } = await import("../../../ai/schemas/roadmapSchema");
+
+  const prompt = getRoadmapPrompt({
+    track: profile.targetCareerTrack || "General Tech",
+    skillLevel: profile.skillLevel || "Beginner",
+    hoursPerWeek: profile.weeklyAvailabilityHours || 10,
+    identifiedGaps,
+  });
+
+  const ai = getGeminiClient();
+  const response = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+    },
+  });
+
+  if (!response || !response.text) {
+    const err = new Error("Failed to generate learning roadmap from Gemini.");
+    (err as any).status = 502;
+    throw err;
+  }
+
+  const rawJson = cleanJsonString(response.text);
+  let parsedJson;
+  try {
+    parsedJson = JSON.parse(rawJson);
+  } catch (parseErr) {
+    const err = new Error("AI response structure is not valid JSON.");
+    (err as any).status = 502;
+    throw err;
+  }
+
+  const validated = roadmapResponseSchema.safeParse(parsedJson);
+  if (!validated.success) {
+    const err = new Error("AI response failed validation against roadmap schema.");
+    (err as any).status = 502;
+    throw err;
+  }
+
+  return validated.data;
+};

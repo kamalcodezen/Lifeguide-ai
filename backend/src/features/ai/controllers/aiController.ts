@@ -131,3 +131,33 @@ export const analyzeResumeController = async (req: AuthenticatedRequest, res: Re
     });
   }
 };
+
+export const generateRoadmapController = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const userId = req.user!.id;
+    const { identifiedGaps = [] } = req.body;
+    
+    const response = await aiService.generateRoadmap(userId, identifiedGaps);
+
+    return res.status(200).json({
+      success: true,
+      data: response,
+      meta: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+  } catch (error: any) {
+    const status = error.status || 500;
+    const code = status === 404 ? "NOT_FOUND" : "AI_SERVICE_ERROR";
+    return res.status(status).json({
+      success: false,
+      error: {
+        code,
+        message: error.message || "An unexpected error occurred during learning roadmap generation.",
+      },
+      meta: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+  }
+};

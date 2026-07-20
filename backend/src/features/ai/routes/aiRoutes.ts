@@ -5,6 +5,7 @@ import {
   getProjectSuggestionsController,
   conductMockInterviewController,
   analyzeResumeController,
+  generateRoadmapController,
 } from "../controllers/aiController";
 
 const router = Router();
@@ -16,5 +17,6 @@ router.get("/career-recommendations", getCareerRecommendationsController);
 router.get("/project-suggestions", getProjectSuggestionsController);
 router.post("/interview", conductMockInterviewController);
 router.post("/resume", analyzeResumeController);
+router.post("/roadmap", generateRoadmapController);
 
 export default router;
